@@ -1,6 +1,7 @@
 package FunctionLayer;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Bog {
 
@@ -8,10 +9,10 @@ public class Bog {
     private String forfatter;
     private String title;
     private String forlag;
-    private Timestamp udgivelsesdato;
+    private Date udgivelsesdato;
 
     //create
-    public Bog(String forfatter, String title, String forlag, Timestamp udgivelsesdato) {
+    public Bog(String forfatter, String title, String forlag, Date udgivelsesdato) {
         this.forfatter = forfatter;
         this.title = title;
         this.forlag = forlag;
@@ -19,7 +20,7 @@ public class Bog {
     }
 
     //read
-    public Bog(int idBog, String forfatter, String title, String forlag, Timestamp udgivelsesdato) {
+    public Bog(int idBog, String forfatter, String title, String forlag, Date udgivelsesdato) {
         this.idBog = idBog;
         this.forfatter = forfatter;
         this.title = title;
@@ -59,7 +60,7 @@ public class Bog {
         this.forlag = forlag;
     }
 
-    public Timestamp getUdgivelsesdato() {
+    public Date getUdgivelsesdato() {
         return udgivelsesdato;
     }
 

@@ -5,6 +5,7 @@ import FunctionLayer.Kunde;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BogMapper {
@@ -25,7 +26,7 @@ public class BogMapper {
             ps.setString(1, bog.getForfatter());
             ps.setString(2, bog.getTitle());
             ps.setString(3, bog.getForlag());
-            ps.setTimestamp(4, bog.getUdgivelsesdato());
+            ps.setDate(4, (java.sql.Date) bog.getUdgivelsesdato());
 
 
             ps.executeUpdate();    //https://javaconceptoftheday.com/difference-between-executequery-executeupdate-execute-in-jdbc/
@@ -58,7 +59,7 @@ public class BogMapper {
                 String forfatter = resultSet.getString("Forfatter");
                 String title = resultSet.getString("Title");
                 String forlag = resultSet.getString("Forlag");
-                Timestamp udgivelsesdato = resultSet.getTimestamp("Udgivelsesdato");
+                Date udgivelsesdato = resultSet.getDate("Udgivelsesdato");
                 Bog bog = new Bog(id, forfatter, title, forlag, udgivelsesdato);
                 bogList.add(bog);
             }
@@ -96,7 +97,7 @@ public class BogMapper {
 
     }
 
-    public static String updateBog(int idBogTabel, String Forfatter , String Title, String Forlag, Timestamp Udgivelsesdato) {
+    public static String updateBog(int idBogTabel, String Forfatter , String Title, String Forlag, Date Udgivelsesdato) {
 
         String sql = "update bogtabel set Forfatter = ? , Title = ? , Forlag = ?, Udgivelsesdato = ? where idBogTabel = ?";
 
@@ -105,7 +106,7 @@ public class BogMapper {
             ps.setString(1, Forfatter);
             ps.setString(2, Title);
             ps.setString(3, Forlag);
-            ps.setTimestamp(4, Udgivelsesdato);
+            ps.setDate(4, (java.sql.Date) Udgivelsesdato);
 
             // det er det her jeg søger på.
             ps.setInt(5, idBogTabel);

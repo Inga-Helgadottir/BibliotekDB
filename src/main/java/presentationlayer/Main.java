@@ -5,6 +5,7 @@ import DBAccess.KundeMapper;
 import FunctionLayer.Bog;
 import FunctionLayer.Kunde;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -12,36 +13,21 @@ import static DBAccess.BogMapper.opretBog;
 
 public class Main {
 
-
     public static void main(String[] args)  {
-//        udskrivKunder();
-//        System.out.println(fjernKunde("Alexander"));
-//        //nyKunde("lone","nøjsomhedsvej 12", "2800");
-//
-//       // udskrivKunder();
-//
-//        System.out.println(fjernKunde("lone"));
-//
-//
-//
-//        opdatere(401, "Jørgen", "Vedkæret 23, ", "2820");
-//
-//        udskrivKunder();
+        /* Kunder CRUD
+            nyKunde("lone","nøjsomhedsvej 12", "2800");
+            udskrivKunder();
+            opdatereKunde(409, "Lone","nøjsomhedsvej 12", "2800");
+            fjernKunde("lone");
+        */
 
+        /* Bøger CRUD
+            nyBog("Alexander Medina","Mathildeparken", "Gyldendal", Timestamp.valueOf("2020-12-16"));
+            udskrivBoger();
+            opdatereBog(6, "Alexander Medina","Mathildeparkens", "Gyldendal", Timestamp.valueOf("2020-12-16"));
+            fjernBog("Mathildeparkens");
+        */
 
-        nyKunde("Alexander","Mathildeparken 23", "3400");
-
-//        udskrivKunder();
-//
-//       fjernKunde("jørgen");
-
-//        nyKunde("Alexander", "matilteparken 23", "3400");
-//        udskrivKunder();
-//        opdatere(406, "Jørgen", "Herninghovedgade 11", "2820");
-
-//        udskrivKunder();
-//        String forfatter, String title, String forlag, Timestamp udgivelsesdato
-        //opretBog("Ana Mitchell", "some book name", "Gyldendal", "2020-03-16 09:44:52");
     }
 
 
@@ -94,7 +80,7 @@ public class Main {
         return BogMapper.deleteBog(title);
     }
 
-    public static String opdatereBog(int idBogTabel, String Forfatter , String Title, String Forlag, Timestamp Udgivelsesdato) {
+    public static String opdatereBog(int idBogTabel, String Forfatter , String Title, String Forlag, Date Udgivelsesdato) {
         return BogMapper.updateBog(idBogTabel, Forfatter , Title, Forlag, Udgivelsesdato);
 
     }
@@ -115,7 +101,7 @@ public class Main {
         return BogMapper.HentBoger();
     }
 
-    public static void nyBog(String forfatter, String title, String forlag, Timestamp udgivelsesdato )  {
+    public static void nyBog(String forfatter, String title, String forlag, Date udgivelsesdato)  {
 
         Bog bog = new Bog(forfatter, title, forlag, udgivelsesdato);
 
