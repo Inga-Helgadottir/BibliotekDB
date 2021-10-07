@@ -1,8 +1,11 @@
 package presentationlayer;
 
+import DBAccess.BogMapper;
 import DBAccess.KundeMapper;
+import FunctionLayer.Bog;
 import FunctionLayer.Kunde;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import static DBAccess.BogMapper.opretBog;
@@ -26,7 +29,7 @@ public class Main {
 //        udskrivKunder();
 
 
-        //nyKunde("Alexander","Mathildeparken 23", "3400");
+        nyKunde("Alexander","Mathildeparken 23", "3400");
 
 //        udskrivKunder();
 //
@@ -53,7 +56,7 @@ public class Main {
     // todo lav en fjernkunde som tager et kunde id som input. Det kunne jo være der var flere kunder med samme navn.
 
 
-    public static String opdatere(int idKunde, String navn, String adresse, String postNr) {
+    public static String opdatereKunde(int idKunde, String navn, String adresse, String postNr) {
 
        return KundeMapper.updateKunde(idKunde,navn,adresse, postNr);
 
@@ -75,8 +78,6 @@ public class Main {
     public static List<Kunde> hentKunder () {
 
         return KundeMapper.HentKunder();
-
-
     }
 
     public static void nyKunde(String navn, String adresse, String postnr )  {
@@ -88,5 +89,37 @@ public class Main {
     }
 
 
+    public static String fjernBog(String title) {
+
+        return BogMapper.deleteBog(title);
+    }
+
+    public static String opdatereBog(int idBogTabel, String Forfatter , String Title, String Forlag, Timestamp Udgivelsesdato) {
+        return BogMapper.updateBog(idBogTabel, Forfatter , Title, Forlag, Udgivelsesdato);
+
+    }
+
+    public static void udskrivBoger() {
+
+        List<Bog> bogList = hentBoger();
+
+        for (Bog b : bogList ) {
+
+            System.out.println( b.getIdBog() + " " + b.getTitle());
+
+        }
+    }
+
+    public static List<Bog> hentBoger () {
+
+        return BogMapper.HentBoger();
+    }
+
+    public static void nyBog(String forfatter, String title, String forlag, Timestamp udgivelsesdato )  {
+
+        Bog bog = new Bog(forfatter, title, forlag, udgivelsesdato);
+
+        BogMapper.opretBog(bog);
+    }
 
 }
