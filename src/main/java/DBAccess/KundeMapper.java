@@ -132,4 +132,51 @@ public class KundeMapper {
 
     }
 
+    public static void HentKunderFraPostNr(String postNrSearch) {
+        String sql = "select * from KundeTabel where PostNr =" + postNrSearch;
+
+        try (Connection con = ConnectionConfiguration.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {           // https://en.wikipedia.org/wiki/Prepared_statement
+
+
+            ResultSet resultSet = ps.executeQuery();   //https://javaconceptoftheday.com/difference-between-executequery-executeupdate-execute-in-jdbc/
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("idKundeTabel");
+                String navn = resultSet.getString("KundeNavn");
+                String adresse = resultSet.getString("Adresse");
+                String postNr = resultSet.getString("PostNr");
+                System.out.println(id + " - " + navn + " - " + adresse + " - " + postNr);
+            }
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    public static void HentKunderOgPostNr(String postNrSearch) {
+        String sql = "SELECT l.TransaktionsId, l.IdBog, l.IdKunde, k.PostNr, b.Title  \n" +
+                "FROM lånetabel AS l \n" +
+                "LEFT JOIN kundetabel AS k  \n" +
+                "ON l.IdKunde=k.idKundeTabel \n" +
+                "LEFT JOIN bogtabel AS b  \n" +
+                "ON l.IdBog=b.IdBogTabel\n" +
+                "WHERE PostNr = " + postNrSearch;
+
+        try (Connection con = ConnectionConfiguration.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {           // https://en.wikipedia.org/wiki/Prepared_statement
+
+
+            ResultSet resultSet = ps.executeQuery();   //https://javaconceptoftheday.com/difference-between-executequery-executeupdate-execute-in-jdbc/
+
+            while (resultSet.next()) {
+                String title = resultSet.getString("Title");
+                String postNr = resultSet.getString("PostNr");
+                System.out.println(title + " " + postNr);
+            }
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+    }
 }

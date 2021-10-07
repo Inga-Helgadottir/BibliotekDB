@@ -78,10 +78,6 @@ public class LaanMapper {
 
 
             while (resultSet.next()) {
-//                int id = resultSet.getInt("TransaktionsId");
-//                int bog = resultSet.getInt("IdBog");
-//                int kunde = resultSet.getInt("IdKunde");
-//                System.out.println(id + " " + bog + " " + kunde + " " + title);
                 String title = resultSet.getString("Title");
                 System.out.println(title);
 
@@ -105,13 +101,36 @@ public class LaanMapper {
 
 
             while (resultSet.next()) {
-//                int id = resultSet.getInt("TransaktionsId");
-//                int bog = resultSet.getInt("IdBog");
-//                int kunde = resultSet.getInt("IdKunde");
-//                System.out.println(id + " " + bog + " " + kunde + " " + title);
                 String name = resultSet.getString("KundeNavn");
                 System.out.println(name);
 
+            }
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    public static void hentLaanMedKundeOgBogTitle(String navn) {
+        String sql = "SELECT l.TransaktionsId, l.IdBog, l.IdKunde, k.KundeNavn, b.Title  \n" +
+                "FROM lånetabel AS l \n" +
+                "LEFT JOIN kundetabel AS k  \n" +
+                "ON l.IdKunde=k.idKundeTabel \n" +
+                "LEFT JOIN bogtabel AS b  \n" +
+                "ON l.IdBog=b.IdBogTabel\n";
+
+        try (Connection con = ConnectionConfiguration.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {           // https://en.wikipedia.org/wiki/Prepared_statement
+
+            ResultSet resultSet = ps.executeQuery();   //https://javaconceptoftheday.com/difference-between-executequery-executeupdate-execute-in-jdbc/
+
+
+            while (resultSet.next()) {
+                String title = resultSet.getString("Title");
+                String name = resultSet.getString("KundeNavn");
+                if(name.equals(navn)){
+                    System.out.println(name + " har lånt bogen " + title);
+                }
             }
         } catch (SQLException e) {
 

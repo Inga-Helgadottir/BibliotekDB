@@ -12,6 +12,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import static DBAccess.BogMapper.opretBog;
+import static DBAccess.KundeMapper.HentKunderFraPostNr;
+import static DBAccess.KundeMapper.HentKunderOgPostNr;
 import static DBAccess.LaanMapper.*;
 
 public class Main {
@@ -35,15 +37,16 @@ public class Main {
             udskrivLaan();
             nytLaan(5, 99);
             udskrivLaan();
-            bogId max 5
-            kundeId max 406
-
+            udfyldLaan(5, 406, 5);
+            udskrivLaanMedBogTitle();
+            hentNavnePaaLaan();
+            hentLaanMedKundeOgBogTitle("Akeem Gonzalez");
+            HentKunderFraPostNr("2800");
+            hentLaanMedKundeOgBogTitle("Akeem Gonzalez");
+            HentKunderOgPostNr("2800");
+            hentLaanMedKundeOgBogTitle("Hiram Buckley");
         */
-//        udskrivLaan();
-//        udfyldLaan(5, 406, 5);
-//        udskrivLaan();
-//        udskrivLaanMedBogTitle();
-        hentNavnePaaLaan();
+
     }
 
     //Kunde-----------------------------------------------------
