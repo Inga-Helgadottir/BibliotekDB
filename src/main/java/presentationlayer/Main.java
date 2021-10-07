@@ -2,14 +2,17 @@ package presentationlayer;
 
 import DBAccess.BogMapper;
 import DBAccess.KundeMapper;
+import DBAccess.LaanMapper;
 import FunctionLayer.Bog;
 import FunctionLayer.Kunde;
+import FunctionLayer.Laan;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
 import static DBAccess.BogMapper.opretBog;
+import static DBAccess.LaanMapper.*;
 
 public class Main {
 
@@ -28,9 +31,22 @@ public class Main {
             fjernBog("Mathildeparkens");
         */
 
+        /* Lån bogId max 5 - min 1, kundeId max 406 - min 1
+            udskrivLaan();
+            nytLaan(5, 99);
+            udskrivLaan();
+            bogId max 5
+            kundeId max 406
+
+        */
+//        udskrivLaan();
+//        udfyldLaan(5, 406, 5);
+//        udskrivLaan();
+//        udskrivLaanMedBogTitle();
+        hentNavnePaaLaan();
     }
 
-
+    //Kunde-----------------------------------------------------
     public static String fjernKunde(String navn) {
 
 
@@ -74,7 +90,7 @@ public class Main {
 
     }
 
-
+    //Bog-------------------------------------------------------
     public static String fjernBog(String title) {
 
         return BogMapper.deleteBog(title);
@@ -108,4 +124,38 @@ public class Main {
         BogMapper.opretBog(bog);
     }
 
+    //Lån-------------------------------------------------------
+    public static void nytLaan(int idBog, int idKunde)  {
+
+        Laan laan = new Laan(idBog, idKunde);
+
+        LaanMapper.opretLaan(laan);
+    }
+
+    public static void udskrivLaan() {
+
+        List<Laan> laaneList = HentLaan();
+
+        for (Laan l : laaneList ) {
+
+            System.out.println("TransactionID: " + l.getTransaktionsId() + ", BogId: " + l.getIdBog() + ", KundeId: " + l.getIdKunde());
+
+        }
+    }
+
+    public static void udfyldLaan(int antalBoger, int antalKunder, int howMany){
+        for (int i = 0; i < howMany; i++) {
+            int randBog = (int)(Math.random()*(antalBoger-1+1)+1);
+            int randKunde = (int)(Math.random()*(antalKunder-1+1)+1);
+            nytLaan(randBog, randKunde);
+        }
+    }
+
+    public static List<Laan> hentLaan () {
+        return LaanMapper.HentLaan();
+    }
+
+    public static void udskrivLaanMedBogTitle() {
+        hentLaanMedBogTitle();
+    }
 }
