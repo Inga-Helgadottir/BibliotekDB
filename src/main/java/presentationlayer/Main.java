@@ -5,6 +5,8 @@ import FunctionLayer.Kunde;
 
 import java.util.List;
 
+import static DBAccess.BogMapper.opretBog;
+
 public class Main {
 
 
@@ -34,7 +36,9 @@ public class Main {
 //        udskrivKunder();
 //        opdatere(406, "Jørgen", "Herninghovedgade 11", "2820");
 
-        udskrivKunder();
+//        udskrivKunder();
+//        String forfatter, String title, String forlag, Timestamp udgivelsesdato
+        //opretBog("Ana Mitchell", "some book name", "Gyldendal", "2020-03-16 09:44:52");
     }
 
 

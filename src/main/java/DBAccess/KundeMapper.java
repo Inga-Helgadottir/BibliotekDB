@@ -10,14 +10,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class KundeMapper {
 
-
-
     public static void opretKunde(Kunde kunde)  {
-
 
         String sql = "INSERT INTO KundeTabel (KundeNavn, Adresse, PostNr ) VALUES (?, ?, ?)";
 
@@ -48,8 +43,6 @@ public class KundeMapper {
 
     }
 
-
-
     public static List<Kunde> HentKunder() {
 
         List<Kunde> kundeList = new ArrayList<>();
@@ -78,7 +71,6 @@ public class KundeMapper {
         return kundeList;
     }
 
-
     public static String deleteKunde(String kundeNavn) {
 
         String sql = "delete from KundeTabel where Kundenavn = ?";
@@ -105,11 +97,6 @@ public class KundeMapper {
 
 
     }
-
-
-
-
-
 
     public static String updateKunde(int idKunde, String kundeNavn , String adresse, String PostNr) {
 
@@ -144,8 +131,5 @@ public class KundeMapper {
 
 
     }
-
-
-
 
 }
